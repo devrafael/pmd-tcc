@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container-global {
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+}
+
+h1{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 50px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h2{
+    margin-bottom: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.form-login{
+    display: grid;
+    place-items: center;
+    background-color: white;
+    padding: 200px 0px;
+    border: 0.5px solid rgba(0, 0, 0, 0);
+
+}
+
+.inputs-container{
+    display: grid;
+    min-width: 80%;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    background-color: #18b1bd;
+    border-radius: 10px;
+}
+.input-email, .input-password{
+    display: grid;
+    grid-template-rows: 1fr; 
+
+}
+
+label{
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+}
+input{
+    height: 50px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-size: 18px;
+    padding: 10px;
+    border: 0.5px solid grey;
+}
+
+.img-login{
+    overflow: hidden;
+}
+
+img{
+    height: 100%;
+    width: 100%;
+}
+
+button{
+    font-size: 16px;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px auto;
+    background-color: #bbe6e9;
+}
+
+button:hover{
+    background-color: #94d5db;
+
+}

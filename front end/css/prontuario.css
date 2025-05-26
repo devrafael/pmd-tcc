@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: #91d4df;
+
+}
+
+header {
+  display: grid;
+  grid-template-columns: 1fr 0.1fr;
+  padding: 1em;
+}
+
+.input-prontuario {
+  border-radius: 5px;
+  border: 0.5px solid gray;
+  padding: 10px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.cards-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  padding: 0.5em;
+}
+
+.card{
+  background-color: white;
+  height: 400px;
+  display: grid;
+  justify-content: center;
+  padding: 10px;
+  border: 1px solid grey;
+  grid-template-rows: 0.2fr;
+  border-radius: 10px;
+}
+
+h2{
+  display: flex;
+  align-items: center;      
+  justify-content: center;
+  text-align: center;
+  height: 40px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin: 10px auto;
+  background-color: rgba(128, 128, 128, 0.5);
+  width: 20em;
+  border-radius: 10px;
+}
+
+
+article{
+  border: 1px solid grey;
+  background-color: rgb(113, 211, 203);
+  width: 58em;
+  height: 20em;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  padding: 10px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  border-radius: 10px;
+
+}
+ul > li {
+  list-style-type: circle;
+}
+
+
+
