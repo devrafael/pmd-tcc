@@ -4,59 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/prontuario.css" />
+    <script defer src="../js/prontuario.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:wght@400;500;700&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
     <title>Prontuário</title>
   </head>
   <body>
     <header>
-      <h1>PACIENTE: {nome do paciente} {(numero do prontuario)}</h1>
-      <input
-        class="input-prontuario"
-        type="number"
-        placeholder="Digite um prontuário"
-      />
+      <div class="input-container">
+        <input
+          class="input-prontuario"
+          type="number"
+          placeholder="Digite um prontuário"
+          id="input-prontuario"
+        />
+        <button id="btn-buscar" onclick="buscarProntuario()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+            />
+          </svg>
+        </button>
+      </div>
+      <h1></h1>
     </header>
     <main class="cards-container">
-      <section class="card">
-        <h2>Queixas Principais</h2>
-        <article>
-          <p>
-            Paciente relata dor abdominal intensa há 3 dias, acompanhada de
-            náuseas e episódios de vômito. Informa também febre leve nas últimas
-            24 horas.
-          </p>
-        </article>
-      </section>
-      <section class="card">
-        <h2>Medicamentos Continuos</h2>
-        <article>
-          <ul>
-            <li>Losartana 50mg - 1 COMP - 24h - Pela manhã</li>
-            <li>Metformina 850mg - 1 COMP - 24h - Após o almoço e jantar</li>
-          </ul>
-        </article>
-      </section>
-      <section class="card">
-        <h2>Prescrição Médica</h2>
-        <article>
-          <ul>
-            <li>Dipirona 500mg - 1 COMP - 6h/6h - Oral - Sem observações</li>
-            <li>Dipirona 500mg - 1 COMP - 6h/6h - Oral - Sem observações</li>
-            <li>Dipirona 500mg - 1 COMP - 6h/6h - Oral - Sem observações</li>
-            <li>Dipirona 500mg - 1 COMP - 6h/6h - Oral - Sem observações</li>
-          </ul>
-        </article>
-      </section>
-      <section class="card">
-        <h2>Exames</h2>
-        <article>
-          <ul>
-            <li>Hemograma completo</li>
-            <li>Glicemia de jejum</li>
-            <li>Função hepática</li>
-            <li>Ultrassonografia abdominal total</li>
-          </ul>
-        </article>
-      </section>
     </main>
   </body>
 </html>

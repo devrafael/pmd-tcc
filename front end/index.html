@@ -5,33 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PMD</title>
     <link rel="stylesheet" href="css/login.css" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <script defer src="js/login.js"></script>
   </head>
   <body>
     <div class="container-global">
-        <form action="" class="form-login">
-          <h1>PRONTUÁRIO MÉDICO DIGITAL &#x1FA7A</h1>
-          <h2>Acessar</h2>
-          <div class="inputs-container">
-            <div class="input-email">
-              <label>Login</label>
-              <input type="email" name="" id="" />
-            </div>
-            <div class="input-password">
-              <label for="">Senha</label>
-              <input type="password" name="" id="" />
-            </div>
-            <button type="button" onclick="Login()">Acessar</button>
+      <form action="" class="form-login">
+        <h1>
+          PRONTUÁRIO MÉDICO DIGITAL
+          <img
+            src="img/stethoscope-2-svgrepo-com.svg"
+            alt="Estetoscopio"
+            class="svg-title"
+          />
+        </h1>
+
+        <div class="inputs-container">
+          <h2>Conectar</h2>
+          <div class="input-email">
+            <label>Email</label>
+            <input type="email" name="" id="email" required />
           </div>
-          
-        </form>
+          <div class="input-password">
+            <label for="">Senha</label>
+            <input type="password" name="" id="password" required />
+          </div>
+          <button type="submit" onclick="Login()">Acessar</button>
+        </div>
+      </form>
       <div class="img-login">
-        <img src="img/prontuario-img.webp" alt="Imagem de prontuario" />
+        <img
+          src="img/banner-medico-com-estetoscopio.jpg"
+          alt="Imagem de prontuario"
+        />
       </div>
     </div>
-
-
-
   </body>
 </html>
