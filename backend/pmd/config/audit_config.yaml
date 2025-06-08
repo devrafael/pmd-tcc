@@ -1,0 +1,27 @@
+auditoria:
+  endpoints_sensiveis:
+    - path: "/prontuario/historico"
+      metodo: "GET"
+      descricao: "Médico acessou histórico"
+  monitoramento_modelos:
+    - "paciente.Paciente"
+    - "prontuario.Prontuario"
+  mascaramento:
+    campos:
+      - cpf
+      - email
+    aes_enabled: false
+    aes_key: ""
+  notificacoes:
+    email:
+      enabled: false
+      from_email: ""
+      recipients: []
+    webhook:
+      enabled: false
+      url: ""
+  metrics:
+    prometheus:
+      enabled: true
+  storage:
+    driver: sql

@@ -1,0 +1,56 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+*.pyd
+*.pdb
+
+# Virtualenv
+venv/
+.env
+.env.*
+
+# Django
+*.log
+*.pot
+*.py[cod]
+db.sqlite3
+media/
+staticfiles/
+
+# VSCode / IDEs
+.vscode/
+.idea/
+*.swp
+
+# PyInstaller
+*.spec
+build/
+dist/
+*.egg-info/
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# Twine/PyPI
+*.egg
+.eggs/
+MANIFEST
+
+# Coverage/test
+.coverage
+htmlcov/
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.pytest_cache/
+
+# wheel
+*.whl
+
+
+meu_relatorio.csv
+db.sqlite3

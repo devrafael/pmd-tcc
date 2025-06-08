@@ -4,9 +4,12 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
+from trackapi.decorators import auditar_evento
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+@auditar_evento(descricao="Acessou prontuário por número", sensivel=True) # Decorador
 def buscarProntuario(request):
     numeroProntuario = request.GET.get('prontuario')
     if not numeroProntuario:
