@@ -8,12 +8,12 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from datetime import datetime, time
 
-from trackapi.decorators import auditar_evento
-from trackapi.metrics import contabilizar_evento, observar_tempo
-from trackapi.reports import export_csv
-from trackapi.masking import mascarar_texto
-from trackapi.encryption import Encryptor
-from trackapi.models import EventoAuditavel
+from trackapi.audit.decorators import auditar_evento
+from trackapi.metrics.metrics import contabilizar_evento, observar_tempo
+from trackapi.reports.reports import export_csv
+from trackapi.crypto.masking import mascarar_texto
+from trackapi.crypto.encryption import Encryptor
+from trackapi.audit.models import EventoAuditavel
 # from trackapi.notifiers.base_notifier import detectar_anomalia
 
 encryptor = Encryptor(settings.ENCRYPTION_KEY)
@@ -37,7 +37,7 @@ def buscarProntuario(request):
             'queixas_principais': prontuarioMedico.queixas_principais,
             'medicamentos_continuos': prontuarioMedico.medicamentos_continuos,
             'exames': prontuarioMedico.exames,
-            'prescicao_medica': prontuarioMedico.prescricao_medica
+            'prescicao_medica': encryptor.decrypt(prontuarioMedico.prescricao_medica)
         })
     except Prontuario.DoesNotExist:
         return JsonResponse({'erro': 'Prontuario nao encontrado'}, status=404)

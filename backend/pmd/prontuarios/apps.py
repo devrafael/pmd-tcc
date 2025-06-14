@@ -5,5 +5,5 @@ class ProntuariosConfig(AppConfig):
     name = 'prontuarios'
 
     def ready(self):
-        from trackapi.signals import registrar_sinais
+        from trackapi.audit.signals import registrar_sinais
         registrar_sinais()

@@ -3,7 +3,7 @@ import os
 
 from django.core.management.base import BaseCommand
 
-from trackapi.models import EventoAuditavel
+from trackapi.audit.models import EventoAuditavel
 
 
 class Command(BaseCommand):

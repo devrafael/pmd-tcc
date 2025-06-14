@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from django.urls import path, include
-from trackapi.metrics import metrics_view
+from trackapi.metrics.metrics import metrics_view
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
