@@ -2,8 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const header = document.querySelector("header h1");
   header.innerHTML = "";
   const h1 = document.createElement("h1");
-  h1.innerHTML = `BUSQUE UM PRONTURÁRIO NO CAMPO ACIMA ⬆️`;
-
+  h1.innerHTML = `Busque um prontuário`;
   header.appendChild(h1);
 });
 

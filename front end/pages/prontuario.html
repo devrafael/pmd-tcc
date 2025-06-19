@@ -1,47 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/prontuario.css" />
-    <script defer src="../js/prontuario.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:wght@400;500;700&family=Roboto&display=swap"
-      rel="stylesheet"
-    />
-    <title>Prontuário</title>
-  </head>
-  <body>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prontuário Médico</title>
+  <link rel="stylesheet" href="../css/prontuario.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <script defer src="../js/prontuario.js"></script>
+</head>
+<body>
+  <div class="container">
     <header>
-      <div class="input-container">
-        <input
-          class="input-prontuario"
-          type="number"
-          placeholder="Digite um prontuário"
-          id="input-prontuario"
-        />
-        <button id="btn-buscar" onclick="buscarProntuario()">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="size-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-            />
-          </svg>
-        </button>
+      <h1>Consulta de Prontuário Médico</h1>
+      <div class="filtros">
+        <input type="number" id="input-prontuario" placeholder="Digite o número do prontuário" />
+        <button onclick="buscarProntuario()"> Buscar</button>
       </div>
-      <h1></h1>
     </header>
+
     <main class="cards-container">
     </main>
-  </body>
+  </div>
+</body>
 </html>
