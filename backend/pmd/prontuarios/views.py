@@ -1,5 +1,5 @@
 from .models import Prontuario
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.conf import settings
 from django.utils.dateparse import parse_date
 from django.views.decorators.csrf import csrf_exempt
@@ -11,12 +11,12 @@ from datetime import datetime, time
 from trackapi.audit.decorators import auditar_evento
 from trackapi.metrics.metrics import contabilizar_evento, observar_tempo
 from trackapi.reports.reports import export_csv
-from trackapi.crypto.masking import mascarar_texto
-from trackapi.crypto.encryption import Encryptor
+# from trackapi.crypto.masking import mascarar_texto
+# from trackapi.crypto.encryption import Encryptor
 from trackapi.audit.models import EventoAuditavel
 # from trackapi.notifiers.base_notifier import detectar_anomalia
 
-encryptor = Encryptor(settings.ENCRYPTION_KEY)
+# encryptor = Encryptor(settings.ENCRYPTION_KEY)
 
 
 @api_view(['GET'])
@@ -37,11 +37,10 @@ def buscarProntuario(request):
             'queixas_principais': prontuarioMedico.queixas_principais,
             'medicamentos_continuos': prontuarioMedico.medicamentos_continuos,
             'exames': prontuarioMedico.exames,
-            'prescicao_medica': encryptor.decrypt(prontuarioMedico.prescricao_medica)
+            'prescicao_medica': prontuarioMedico.prescricao_medica
         })
     except Prontuario.DoesNotExist:
         return JsonResponse({'erro': 'Prontuario nao encontrado'}, status=404)
-
 
 
 @api_view(['GET'])
@@ -69,80 +68,80 @@ def exportarProntuariosCSV(request):
     )
 
 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-@auditar_evento(descricao="Cadastrou prontuário com criptografia", sensivel=True)
-def cadastrarProntuarioCriptografado(request):
-    dados = request.data
-    numero = dados.get("numeroProntuario")
-    prescricao_original = dados.get("prescricao_medica")
+# @api_view(['POST'])
+# @permission_classes([IsAuthenticated])
+# @auditar_evento(descricao="Cadastrou prontuário com criptografia", sensivel=True)
+# def cadastrarProntuarioCriptografado(request):
+#     dados = request.data
+#     numero = dados.get("numeroProntuario")
+#     prescricao_original = dados.get("prescricao_medica")
 
-    if not numero:
-        return JsonResponse({"erro": "O número do prontuário é obrigatório."}, status=400)
+#     if not numero:
+#         return JsonResponse({"erro": "O número do prontuário é obrigatório."}, status=400)
 
-    try:
-        numero = int(numero)
-    except ValueError:
-        return JsonResponse({"erro": "O número do prontuário deve ser numérico."}, status=400)
+#     try:
+#         numero = int(numero)
+#     except ValueError:
+#         return JsonResponse({"erro": "O número do prontuário deve ser numérico."}, status=400)
 
-    if not prescricao_original:
-        return JsonResponse({"erro": "Prescrição médica obrigatória."}, status=400)
+#     if not prescricao_original:
+#         return JsonResponse({"erro": "Prescrição médica obrigatória."}, status=400)
 
-    existente = Prontuario.objects.filter(numeroProntuario=numero).first()
-    if existente:
-        return JsonResponse({
-            "erro": "Número de prontuário já cadastrado.",
-            "id_existente": existente.id,
-            "numeroProntuario": existente.numeroProntuario
-        }, status=200)
+#     existente = Prontuario.objects.filter(numeroProntuario=numero).first()
+#     if existente:
+#         return JsonResponse({
+#             "erro": "Número de prontuário já cadastrado.",
+#             "id_existente": existente.id,
+#             "numeroProntuario": existente.numeroProntuario
+#         }, status=200)
 
-    prontuario = Prontuario.objects.create(
-        numeroProntuario=numero,
-        paciente_id=dados.get("paciente_id"),
-        queixas_principais=dados.get("queixas_principais", ""),
-        medicamentos_continuos=dados.get("medicamentos_continuos", ""),
-        exames=dados.get("exames", ""),
-        prescricao_medica=encryptor.encrypt(prescricao_original)
-    )
+#     prontuario = Prontuario.objects.create(
+#         numeroProntuario=numero,
+#         paciente_id=dados.get("paciente_id"),
+#         queixas_principais=dados.get("queixas_principais", ""),
+#         medicamentos_continuos=dados.get("medicamentos_continuos", ""),
+#         exames=dados.get("exames", ""),
+#         prescricao_medica=encryptor.encrypt(prescricao_original)
+#     )
 
-    return Response({
-        "mensagem": "Prontuário salvo com prescrição criptografada.",
-        "id": prontuario.id
-    })
-
-
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-@auditar_evento(descricao="Leu prontuário com descriptografia", sensivel=True)
-def visualizarPrescricaoDescriptografada(request, prontuario_id):
-    try:
-        prontuario = Prontuario.objects.get(id=prontuario_id)
-        prescricao = encryptor.decrypt(prontuario.prescricao_medica)
-
-        return Response({
-            "id": prontuario.id,
-            "numero_prontuario": prontuario.numeroProntuario,
-            "prescricao_medica": prescricao
-        })
-    except Prontuario.DoesNotExist:
-        return JsonResponse({"erro": "Prontuário não encontrado"}, status=404)
+#     return Response({
+#         "mensagem": "Prontuário salvo com prescrição criptografada.",
+#         "id": prontuario.id
+#     })
 
 
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-@auditar_evento(descricao="Visualizou prontuário com número mascarado", sensivel=True)
-def visualizarProntuarioMascarado(request, prontuario_id):
-    try:
-        prontuario = Prontuario.objects.get(id=prontuario_id)
-        numero_mascarado = mascarar_texto(prontuario.numeroProntuario)
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# @auditar_evento(descricao="Leu prontuário com descriptografia", sensivel=True)
+# def visualizarPrescricaoDescriptografada(request, prontuario_id):
+#     try:
+#         prontuario = Prontuario.objects.get(id=prontuario_id)
+#         prescricao = encryptor.decrypt(prontuario.prescricao_medica)
 
-        return Response({
-            "id": prontuario.id,
-            "numero_prontuario_mascarado": numero_mascarado,
-            "paciente": prontuario.paciente.nomeCompleto
-        })
-    except Prontuario.DoesNotExist:
-        return JsonResponse({"erro": "Prontuário não encontrado"}, status=404)
+#         return Response({
+#             "id": prontuario.id,
+#             "numero_prontuario": prontuario.numeroProntuario,
+#             "prescricao_medica": prescricao
+#         })
+#     except Prontuario.DoesNotExist:
+#         return JsonResponse({"erro": "Prontuário não encontrado"}, status=404)
+
+
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# @auditar_evento(descricao="Visualizou prontuário com número mascarado", sensivel=True)
+# def visualizarProntuarioMascarado(request, prontuario_id):
+#     try:
+#         prontuario = Prontuario.objects.get(id=prontuario_id)
+#         numero_mascarado = mascarar_texto(prontuario.numeroProntuario)
+
+#         return Response({
+#             "id": prontuario.id,
+#             "numero_prontuario_mascarado": numero_mascarado,
+#             "paciente": prontuario.paciente.nomeCompleto
+#         })
+#     except Prontuario.DoesNotExist:
+#         return JsonResponse({"erro": "Prontuário não encontrado"}, status=404)
 
 
 @csrf_exempt
@@ -156,6 +155,10 @@ def listarEventosAuditados(request):
 
     if usuario:
         qs = qs.filter(usuario__username=usuario)
+
+    if tipo:
+        qs = qs.filter(tipo_evento=tipo)
+
     if data_inicio:
         data_inicio_dt = datetime.combine(parse_date(data_inicio), time.min)
         qs = qs.filter(data_hora__gte=data_inicio_dt)
@@ -177,7 +180,7 @@ def listarEventosAuditados(request):
 
     return JsonResponse({"eventos": eventos}, safe=False)
 
-#novos que precisam de front e urls
+# novos que precisam de front e urls
 # @csrf_exempt
 # def detectarAnomalia(request):
 #     eventos_db = EventoAuditavel.objects.order_by('-data')[:20]
